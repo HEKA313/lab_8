@@ -2,7 +2,7 @@ import math
 import sys
 
 
-def is_there_the_triangle(triangle1, triangle2):
+def is_there_the_triangle(triangle1, triangle2):  # Проверка существования треугольника
 	check = True
 	a1 = triangle1[0]
 	b1 = triangle1[1]
@@ -22,7 +22,7 @@ def is_there_the_triangle(triangle1, triangle2):
 	return check
 
 
-def similarity_check(triangle1, triangle2):
+def similarity_check(triangle1, triangle2):  # Проверка подобия
 	if triangle1[0] / triangle2[0] == triangle1[1] / triangle2[1] == triangle1[2] / triangle2[2]:
 		check = True
 	else:
@@ -30,22 +30,23 @@ def similarity_check(triangle1, triangle2):
 	return check
 
 
-def finding_the_area(triangle):
+def finding_the_area(triangle):  # нахождение площади
 	p = (triangle[0] + triangle[1] + triangle[2]) / 2
 	s = math.sqrt(p * (p - triangle[0]) * (p - triangle[1]) * (p - triangle[2]))
 	return s
 
 
-def finding_the_perimeter(triangle):
+def finding_the_perimeter(triangle):  # нахождение периметра
 	return triangle[0] + triangle[1] + triangle[2]
 
 
-name_file = sys.argv[1]
+name_file = sys.argv[1]  # чтение командной строки
 
-file = open(name_file, 'r')
+file = open(name_file, 'r')  # открытие файла
 
-n = int(file.readline())
+n = int(file.readline())  # считывание количества треугольников
 
+# инициализация массивов
 triangles1 = [0] * n
 triangles2 = [0] * n
 
@@ -53,35 +54,36 @@ for i in range(n):
 	triangles1[i] = [0] * 3
 	triangles2[i] = [0] * 3
 
-for i in range(n):
+for i in range(n):  # считывание массивов
 	line = file.readline().split()
 	for j in range(3):
 		triangles1[i][j] = int(line[j])
 		triangles2[i][j] = int(line[3 + j])
 
+# инициализация переменных
 count = 0
 square = [0] * n
 perimeter = [0] * n
 
 for i in range(n):
-	if not is_there_the_triangle(triangles1[i], triangles2[i]):
+	if not is_there_the_triangle(triangles1[i], triangles2[i]):  # существуют ли треугольники
 		continue
 
-	if not similarity_check(triangles1[i], triangles2[i]):
+	if not similarity_check(triangles1[i], triangles2[i]):  # подобны ли треугольники
 		continue
-	else:
+	else:  # подсчет количества подобных треуг и нахождения площади и периметра
 		count += 1
 		square[i] = (finding_the_area(triangles1[i]) + finding_the_area(triangles2[i]))
 		perimeter[i] = (finding_the_perimeter(triangles1[i]) + finding_the_perimeter(triangles2[i]))
 
-if count != 0:
+if count != 0:  # проверка на количество подобных треугольников
 	print("Количество пар подобных треугольников равно: {}".format(count))
 	print("Суммарные площади каждой пары подобных треугольников равны:")
-	for elem in square:
+	for elem in square:  # вывод площадей
 		if elem != 0:
 			print("{}".format(elem))
 	print("Суммарные периметры каждой пары подобных треугольников равны:")
-	for elem in perimeter:
+	for elem in perimeter:  # вывод периметров
 		if elem != 0:
 			print("{}".format(elem))
 else:
