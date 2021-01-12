@@ -66,15 +66,12 @@ square = [0] * n
 perimeter = [0] * n
 
 for i in range(n):
-	if not is_there_the_triangle(triangles1[i], triangles2[i]):  # существуют ли треугольники
-		continue
-
-	if not similarity_check(triangles1[i], triangles2[i]):  # подобны ли треугольники
-		continue
-	else:  # подсчет количества подобных треуг и нахождения площади и периметра
-		count += 1
-		square[i] = (finding_the_area(triangles1[i]) + finding_the_area(triangles2[i]))
-		perimeter[i] = (finding_the_perimeter(triangles1[i]) + finding_the_perimeter(triangles2[i]))
+	if is_there_the_triangle(triangles1[i], triangles2[i]):  # существуют ли треугольники
+		if similarity_check(triangles1[i], triangles2[i]):  # подобны ли треугольники
+			# подсчет количества подобных треуг и нахождения площади и периметра
+			count += 1
+			square[i] = (finding_the_area(triangles1[i]) + finding_the_area(triangles2[i]))
+			perimeter[i] = (finding_the_perimeter(triangles1[i]) + finding_the_perimeter(triangles2[i]))
 
 if count != 0:  # проверка на количество подобных треугольников
 	print("Количество пар подобных треугольников равно: {}".format(count))
