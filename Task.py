@@ -2,14 +2,8 @@ import math
 import sys
 
 
-def is_there_the_triangle(triangle1, triangle2):  # Проверка существования треугольника
+def is_there_the_triangle(a1, b1, c1, a2, b2, c2):  # Проверка существования треугольника
 	check = True
-	a1 = triangle1[0]
-	b1 = triangle1[1]
-	c1 = triangle1[2]
-	a2 = triangle2[0]
-	b2 = triangle2[1]
-	c2 = triangle2[2]
 	if a1 <= 0 or b1 <= 0 or c1 <= 0 or a2 <= 0 or b2 <= 0 or c2 <= 0:
 		print("Треугольника с отрицательными сторонами не бывает)")
 		check = False
@@ -66,7 +60,9 @@ square = [0] * n
 perimeter = [0] * n
 
 for i in range(n):
-	if is_there_the_triangle(triangles1[i], triangles2[i]):  # существуют ли треугольники
+	a1, b1, c1 = triangles1[i][0], triangles1[i][1], triangles1[i][2]
+	a2, b2, c2 = triangles2[i][0], triangles2[i][1], triangles2[i][2]
+	if is_there_the_triangle(a1, b1, c1, a2, b2, c2):  # существуют ли треугольники
 		if similarity_check(triangles1[i], triangles2[i]):  # подобны ли треугольники
 			# подсчет количества подобных треуг и нахождения площади и периметра
 			count += 1
